@@ -24,4 +24,4 @@ Employee.prototype.getRole = function(){
     //return const role = "Employee";
 }
 
-module.exports = Employee;
+module.exports = Employee
