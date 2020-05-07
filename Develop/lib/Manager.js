@@ -4,12 +4,15 @@ const Employee = require("./Employee");
 
 
 class Manager extends Employee {
-  constructor(name, id, officeNumber) {
+  constructor(name, id, email, officeNumber) {
+    super(name, id, email);
     this.officeNumber = officeNumber;
+    
     this.getRole = () => {
         const role = "Manager";
-        return role}   
-    super(name, id, email, role);
+        return role
+    }   
+    this.getOfficeNumber = () => this.officeNumber;
   }
 }
   
@@ -20,28 +23,35 @@ const buildManager = (data) => {
     {
       type: "input",
       name: "name",
-      message: "What is your manager's name?",
+      message: "What is your manager's name?"
     },
     //id
     {
       type: "input",
       name: "id",
-      message: "What is your manager's id?",
+      message: "What is your manager's id?"
     },
+     //email
+     {
+        type: "input",
+        name: "email",
+        message: "What is your manager's email?"
+      },
     //Office Number
     {
       type: "input",
       name: "officeNumber",
-      message: "What is your manager's office number",
+      message: "What is your manager's office number"
     }
   ])
   .then(function(data){
     console.log("Manager's name is " + data.name);
-    console.log("Manager's id is " + data.id)
+    console.log("Manager's id is " + data.id);
+    console.log("Manager's email is " + data.email);
     console.log("Manager's officeNumber is " + data.officeNumber)
   })
   .then(function(){
-    const manager = new Manager(data.name, data.id, data.officeNumber)
+    const manager = new Manager(data.name, data.id, data.email, data.officeNumber)
     console.log(manager);
   })
   .catch(function(err) {
