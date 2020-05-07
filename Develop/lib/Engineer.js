@@ -50,8 +50,9 @@ function buildEngineer() {
     console.log("Engineer's id is " + data.id)
     console.log("Engineer's email is " + data.email)
     console.log("Engineer's github username is " + data.github)
+    return data;
   })
-  .then(function(){
+  .then(function(data){
     const engineer = new Engineer(data.name, data.id, data.email, data.github)
     console.log(engineer);
   })

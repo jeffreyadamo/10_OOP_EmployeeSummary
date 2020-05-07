@@ -49,8 +49,9 @@ const buildManager = (data) => {
     console.log("Manager's id is " + data.id);
     console.log("Manager's email is " + data.email);
     console.log("Manager's officeNumber is " + data.officeNumber)
+    return data;
   })
-  .then(function(){
+  .then(function(data){
     const manager = new Manager(data.name, data.id, data.email, data.officeNumber)
     console.log(manager);
   })

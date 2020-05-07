@@ -50,11 +50,15 @@ function buildIntern() {
     console.log("Intern's id is " + data.id);
     console.log("Intern's email is " + data.email);
     console.log("Intern's school is " + data.school)
+    return data
   })
-  .then(function(){
+  .then(function(data){
     const intern = new Intern(data.name, data.id, data.email, data.school)
     console.log(intern);
   })
+  .catch(function(err) {
+    console.log(err)
+ })
 }
 
 module.exports = {
