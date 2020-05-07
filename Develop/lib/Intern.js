@@ -36,8 +36,20 @@ function buildIntern() {
       type: "input",
       name: "school",
       message: "Where did the intern go to school?",
-    },
-  ]);
+    }
+  ])
+  .then(function(data){
+    console.log("Intern's name is " + data.name);
+    console.log("Intern's id is " + data.id)
+    console.log("Intern's school is " + data.school)
+  })
+  .then(function(){
+    const intern = new Intern(data.name, data.id, data.school)
+    console.log(intern);
+  })
 }
 
-module.exports = Intern;
+module.exports = {
+    Intern,
+    buildIntern
+}

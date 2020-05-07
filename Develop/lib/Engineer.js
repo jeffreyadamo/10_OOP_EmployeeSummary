@@ -36,8 +36,23 @@ function buildEngineer() {
       type: "input",
       name: "gitHub",
       message: "What is your engineer's GitHub username?",
-    },
-  ]);
+    }
+  ])
+  .then(function(data){
+    console.log("Engineer's name is " + data.name);
+    console.log("Engineer's id is " + data.id)
+    console.log("Engineer's GitHub username is " + data.gitHub)
+  })
+  .then(function(){
+    const engineer = new Engineer(data.name, data.id, data.gitHub)
+    console.log(engineer);
+  })
+  .catch(function(err) {
+        console.log(err)
+     })
 }
 
-module.exports = Engineer;
+module.exports = {
+    Engineer,
+    buildEngineer
+}

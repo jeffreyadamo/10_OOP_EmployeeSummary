@@ -2,19 +2,19 @@
 const inquirer = require("inquirer");
 const Employee = require("./Employee");
 
+
 class Manager extends Employee {
-  constructor(officeNumber) {
+  constructor(name, id, officeNumber) {
     this.officeNumber = officeNumber;
-    super(
-      (getRole = function () {
+    this.getRole = () => {
         const role = "Manager";
-        return role;
-      })
-    );
+        return role}   
+    super(name, id, email, role);
   }
 }
+  
 
-const buildManager = () => {
+const buildManager = (data) => {
   inquirer.prompt([
     //Name
     {
@@ -34,10 +34,22 @@ const buildManager = () => {
       name: "officeNumber",
       message: "What is your manager's office number",
     }
-  ]).then(function(){
-    console.log("Manager data input")
-})
+  ])
+  .then(function(data){
+    console.log("Manager's name is " + data.name);
+    console.log("Manager's id is " + data.id)
+    console.log("Manager's officeNumber is " + data.officeNumber)
+  })
+  .then(function(){
+    const manager = new Manager(data.name, data.id, data.officeNumber)
+    console.log(manager);
+  })
+  .catch(function(err) {
+        console.log(err)
+     })
 }
+
+
 
 module.exports = {
         Manager,

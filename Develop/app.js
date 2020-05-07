@@ -1,24 +1,21 @@
 const {Manager} = require("./lib/Manager"); 
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const {Engineer} = require("./lib/Engineer");
+const {Intern} = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 const {buildManager} = require("./lib/Manager"); 
+const {buildIntern} = require("./lib/Intern"); 
+const {buildEngineer} = require("./lib/Engineer"); 
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 // bob
-
-//Start off with building a manager and then figure out how to prompt for the role
-
-// const role = "Manager";
 
 function buildEmployee() {
      inquirer.
@@ -38,24 +35,22 @@ function buildEmployee() {
         .then(function(data){
           console.log("role received");
           console.log("role is " + data.role);
+
           switch(data.role){
             case "Manager":
-                console.log("reached this far")
-                buildManager();
+                return buildManager(data);
             case "Engineer":
-                buildEngineer();
+                return buildEngineer(data);
             case "Intern":
-                buildIntern();
-        }
+                return buildIntern(data);
+            }
          })
-         .catch(function(err) {
-            console.log("Error")
-         })
-       
 }
 
 
 buildEmployee();
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
