@@ -4,21 +4,15 @@ const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
-// const {buildManager} = require("./lib/Manager");
-// const {buildIntern} = require("./lib/Intern");
-// const {buildEngineer} = require("./lib/Engineer");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 const employeeArr = [];
+let managerCount = 0;
 
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
-// bob
-
-const buildEmployee = function () {
+const buildEmployee = () => {
   inquirer
     .prompt([
       {
@@ -29,18 +23,15 @@ const buildEmployee = function () {
       },
     ])
     .then(function (data) {
-      console.log("role received");
-      console.log("role is " + data.role);
-
       switch (data.role) {
         case "Manager":
-          return buildManager(data);
+          return confirmManager();
         case "Engineer":
-          return buildEngineer(data);
+          return buildEngineer();
         case "Intern":
-          return buildIntern(data);
+          return buildIntern();
         case "No more employees to add":
-          console.log("HTML will be rendered here");
+          console.log("HTML will be rendered in the output folder");
           return lastStep();
       }
     });
@@ -48,33 +39,11 @@ const buildEmployee = function () {
 
 buildEmployee();
 
-module.exports = buildEmployee;
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
-
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
-
-// HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
-// and Intern classes should all extend from a class named Employee; see the directions
-// for further information. Be sure to test out each class and verify it generates an
-// object with the correct structure and methods. This structure will be crucial in order
-// for the provided `render` function to work! ```
 function lastStep() {
-  fs.writeFile("ChangeThisLater.html", render(employeeArr), function (err) {
+  fs.writeFile(outputPath, render(employeeArr), function (err) {
     if (err) {
       throw err;
     }
-
-    console.log("Done");
   });
 }
 
@@ -107,32 +76,43 @@ function buildEngineer() {
       },
     ])
     .then(function (data) {
-      console.log("Engineer's name is " + data.name);
-      console.log("Engineer's id is " + data.id);
-      console.log("Engineer's email is " + data.email);
-      console.log("Engineer's github username is " + data.github);
-      return data;
-    })
-    .then(function (data) {
       const engineer = new Engineer(
         data.name,
         data.id,
         data.email,
         data.github
       );
-      console.log(engineer);
       employeeArr.push(engineer);
       buildEmployee();
     })
-    // .then(function () {
-    //   buildEmployee;
-    // }) //why doesn't this work?
     .catch(function (err) {
       console.log(err);
     });
 }
 
-const buildManager = (data) => {
+//If an 2nd Manager is selected to be build, app asks for confirmation
+const confirmManager = () => {
+  if (managerCount > 0) {
+    inquirer
+      .prompt([
+        {
+          type: "confirm",
+          name: "extraManager",
+          message: "Team already has a manager, would you like to another?",
+        },
+      ])
+      .then(function (data) {
+        if (data.extraManager === true) {
+          buildManager();
+        } else buildEmployee();
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  } else buildManager();
+};
+
+function buildManager() {
   inquirer
     .prompt([
       //Name
@@ -161,27 +141,20 @@ const buildManager = (data) => {
       },
     ])
     .then(function (data) {
-      console.log("Manager's name is " + data.name);
-      console.log("Manager's id is " + data.id);
-      console.log("Manager's email is " + data.email);
-      console.log("Manager's officeNumber is " + data.officeNumber);
-      return data;
-    })
-    .then(function (data) {
       const manager = new Manager(
         data.name,
         data.id,
         data.email,
         data.officeNumber
       );
-      console.log(manager);
       employeeArr.push(manager);
+      managerCount++;
       buildEmployee();
     })
     .catch(function (err) {
       console.log(err);
     });
-};
+}
 
 function buildIntern() {
   inquirer
@@ -212,15 +185,12 @@ function buildIntern() {
       },
     ])
     .then(function (data) {
-      console.log("Intern's name is " + data.name);
-      console.log("Intern's id is " + data.id);
-      console.log("Intern's email is " + data.email);
-      console.log("Intern's school is " + data.school);
-      return data;
-    })
-    .then(function (data) {
-      const intern = new Intern(data.name, data.id, data.email, data.school);
-      console.log(intern);
+      const intern = new Intern(
+        data.name, 
+        data.id, 
+        data.email, 
+        data.school
+      );
       employeeArr.push(intern);
       buildEmployee();
     })
