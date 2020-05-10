@@ -2,8 +2,9 @@
 
 Jeffrey Adamo  
 UW Full Stack Coding Boot Camp  
-[Employee Summary Generator](https://jeffreyadamo.github.io/10_OOP_EmployeeSummary/) at GitHub Pages  
+[Employee Summary Generator ](https://github.com/jeffreyadamo/10_OOP_EmployeeSummary) at GitHub  
 ![MIT](https://img.shields.io/badge/license-MIT-green)  
+
 ***
 
 ## Description
