@@ -37,7 +37,7 @@ www.trilogyed.com
 
 * [Tests](#tests)
 
-* [Questions](#questions)
+* [Questions/Contributions](#questions/contributions)
 
 ## Installation
 
@@ -57,17 +57,14 @@ npm i
 
 After cloning from GitHub and installing dependencies, run "node app.js" and follow the prompts. Each employee has "name", "id", and "email" prompts, but each type of employee will ask additional questions. There is only one manager expected, so a confirmation prompt will be issued if more than one manager is added to the team. Look in the output folder for "team.html" when complete.
 
-### For directions on how to run this application, please follow the video link:
+### For directions on how to run this application, click on the gif below to see a YouTube:
 
-[![For directions on how run this application:](https://i3.ytimg.com/vi/Kldpa75Xnvg/maxresdefault.jpg)](https://www.youtube.com/watch?v=Kldpa75Xnvg&feature=youtu.be)
+[![For directions on how run this application:](./assets/about.gif)](https://www.youtube.com/watch?v=Kldpa75Xnvg&feature=youtu.be)
 
 ### Upon completion of prompts, "team.html" will be generated in the output folder:
 
-<img src="./Assets/team.png" width="500" >
+<img src="./Assets/team.png" width="600" >
 
-## Contributing
-
-Submit an issue or contact my GitHub
 
 ## Tests
 
@@ -79,10 +76,13 @@ npm test
 ```
 This will ensure each employee class can have its properties accessed. These can be found in the test folder.
 
+## Contributing
 
-## Questions
+Submit an issue or contact my GitHub
 
-For questions, open an issue or contact my GitHub  
+## Questions/Contributions
+
+For further questions on this app, please open an issue or contact my GitHub  
 
 
 <img src="https://avatars3.githubusercontent.com/u/58490053?v=4" width="75">    
