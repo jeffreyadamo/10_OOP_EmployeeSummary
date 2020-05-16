@@ -60,7 +60,7 @@ After cloning from GitHub and installing dependencies, run "node app.js" and fol
 
 ### For directions on how to run this application, click on the gif below to see a YouTube:
 
-[![For directions on how run this application:](./assets/about.gif)](https://www.youtube.com/watch?v=Kldpa75Xnvg&feature=youtu.be)
+[![For directions on how run this application:](./Assets/about.gif)](https://www.youtube.com/watch?v=Kldpa75Xnvg&feature=youtu.be)
 
 ### Upon completion of prompts, "team.html" will be generated in the output folder:
 
